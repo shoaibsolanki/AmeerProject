@@ -71,23 +71,21 @@ const TradeCard: React.FC<TradeCardProps> = ({
           {description}
         </p>
         <div className="mt-6 flex gap-3">
-          {cta
-            ? cta(navigate)
-            : type === "premium"
-            ? (
-                <>
-                  <button className="rounded px-3 py-1.5 text-sm bg-[#232334] text-[#7aaeeb] border border-[#232334] hover:bg-[#25263c]">
-                    View Demo
-                  </button>
-                  <button
-                    className="rounded px-4 py-1.5 text-sm bg-[#245ff8] text-white hover:bg-[#4171f7]"
-                    onClick={() => navigate("/checkout")}
-                  >
-                    Upgrade Premium Access
-                  </button>
-                </>
-              )
-            : null}
+          {cta ? (
+            cta(navigate)
+          ) : type === "premium" ? (
+            <>
+              <button className="rounded px-3 py-1.5 text-sm bg-[#232334] text-[#7aaeeb] border border-[#232334] hover:bg-[#25263c]">
+                View Demo
+              </button>
+              <button
+                className="btn-primary"
+                onClick={() => navigate("/checkout")}
+              >
+                Upgrade Premium Access
+              </button>
+            </>
+          ) : null}
         </div>
       </div>
     </div>
@@ -181,8 +179,8 @@ export default function Products() {
           </a>
         </div>
         <div className="text-sm text-gray-400 mb-8">
-          Access institutional-grade indicators designed to give you an edge free
-          forever.
+          Access institutional-grade indicators designed to give you an edge
+          free forever.
         </div>
         <div className="grid grid-cols-1 md:grid-cols-3 gap-7">
           {freeCards.map((c) => (

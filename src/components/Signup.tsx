@@ -1,13 +1,14 @@
 import { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { Regsiter } from "../services/Auth/Authapi";
 
-export default function Signup({
-  setpage,
-}: {
+interface SignupProps {
   setpage: (page: number) => void;
-}) {
+  email: string;
+  setEmail: (email: string) => void;
+}
+
+export default function Signup({ setpage, email, setEmail }: SignupProps) {
   const [showPassword, setShowPassword] = useState(false);
-  const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
   useEffect(() => {
@@ -18,7 +19,23 @@ export default function Signup({
     link.rel = "stylesheet";
     document.head.appendChild(link);
   }, []);
-  const navigate = useNavigate();
+
+  const handlesignup = async () => {
+    try {
+      const payload = {
+        email: email,
+        password: password,
+      };
+      // Call the Regsiter API
+      const response = await Regsiter(payload);
+      console.log("Registration successful:", response);
+      setpage(2);
+      // Navigate to another page or show success message
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   return (
     <div className="space-y-6">
       <div className="text-center">
@@ -91,7 +108,7 @@ export default function Signup({
 
         {/* Create account button */}
         <div className="flex justify-end">
-          <button onClick={() => setpage(2)} className="btn-primary">
+          <button onClick={handlesignup} className="btn-primary">
             Create an account
           </button>
         </div>

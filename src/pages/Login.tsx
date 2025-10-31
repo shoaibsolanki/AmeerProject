@@ -5,6 +5,7 @@ import Signup from "../components/Signup";
 
 export default function Login() {
   const [page, setpage] = useState<Number>(0);
+  const [email, setEmail] = useState("");
   useEffect(() => {
     // Load Google Fonts
     const link = document.createElement("link");
@@ -30,6 +31,7 @@ export default function Login() {
       </div>
 
       {/* Right half - Login form */}
+      {/* <div className="flex items-center justify-center"> */}
       <div className="md:w-1/2 w-[320px]  flex items-center justify-center p-8 bg-[#030303] md:m-8 m-3 rounded-2xl">
         <div className="w-full max-w-md">
           <div className="  p-8 ">
@@ -64,13 +66,16 @@ export default function Login() {
                 </>
               )}
 
-              {page == 1 && <Signup setpage={setpage} />}
-              {page == 2 && <VerifyEmail />}
+              {page == 1 && (
+                <Signup setpage={setpage} email={email} setEmail={setEmail} />
+              )}
+              {page == 2 && <VerifyEmail email={email} />}
               {/* Email log in button */}
             </div>
           </div>
         </div>
       </div>
+      {/* </div> */}
     </div>
   );
 }

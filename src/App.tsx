@@ -7,8 +7,6 @@ import Announcements from "./pages/Announcement";
 import Product from "./pages/Product";
 import PremiumBenefits from "./pages/PremiumBenefits";
 import Checkout from "./pages/Checkout";
-// import Signup from "./components/Signup";
-// import VerifyEmail from "./components/verify";
 
 export default function App() {
   return (
@@ -22,12 +20,6 @@ export default function App() {
           <Route path="products" element={<Product />} />
           <Route path="upgrade-premium" element={<PremiumBenefits />} />
           <Route path="checkout" element={<Checkout />} />
-
-
-
-
-          {/* <Route path="signup" element={<Signup />} />
-          <Route path="verify" element={<VerifyEmail />} /> */}
         </Route>
       </Routes>
     </Router>
