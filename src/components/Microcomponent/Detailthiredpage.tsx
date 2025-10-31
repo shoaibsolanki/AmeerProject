@@ -1,42 +1,75 @@
 import React from "react";
 import { ChevronDown, Home, MapPin } from "lucide-react";
-import { useNavigate } from "react-router-dom";
 
 interface DetailthiredpageProps {
-  selectedState: string;
-  setSelectedState: (state: string) => void;
-  selectedCity: string;
-  setSelectedCity: (city: string) => void;
+  formData: {
+    state: string;
+    city: string;
+    pincode: string;
+    addressLine: string;
+  };
+  setFormData: React.Dispatch<
+    React.SetStateAction<{
+      state: string;
+      city: string;
+      pincode: string;
+      addressLine: string;
+      [key: string]: any;
+    }>
+  >;
+  states: string[];
+  cities: Record<string, string[]>;
+  onSubmit: () => void;
+  setStep: (step: number) => void;
 }
 
 const Detailthiredpage = ({
-  selectedState,
-  setSelectedState,
-  selectedCity,
-  setSelectedCity,
+  formData,
+  setFormData,
+  states,
+  cities,
+  onSubmit,
+  setStep,
 }: DetailthiredpageProps) => {
-  const navigate = useNavigate();
-  const states = ["Tamil Nadu", "Kerala", "Karnataka"];
-  const cities = {
-    "Tamil Nadu": ["Madurai", "Nagapattinam", "Neyveli"],
-    Kerala: ["Kochi", "Trivandrum", "Kozhikode"],
-    Karnataka: ["Bangalore", "Mysuru", "Mangalore"],
+  const handleChange = (e: React.ChangeEvent<HTMLSelectElement | HTMLInputElement>) => {
+    const { name, value } = e.target;
+    setFormData(prev => ({
+      ...prev,
+      [name]: value,
+    }));
   };
+
+  const handleFormSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    // Validate or optionally move to next step before final submit here
+    onSubmit();
+  };
+
   return (
-    <form className="space-y-5 mt-6">
+    <form className="space-y-5 mt-6" onSubmit={handleFormSubmit}>
       {/* State & City */}
       <div className="grid grid-cols-2 gap-4">
         <div className="space-y-2">
           <label className="text-sm text-gray-400">State</label>
           <div className="relative">
             <select
-              value={selectedState}
-              onChange={(e) => setSelectedState(e.target.value)}
+              name="state"
+              value={formData.state}
+              onChange={(e) => {
+                // Clear city when state changes
+                setFormData(prev => ({
+                  ...prev,
+                  state: e.target.value,
+                  city: "",
+                }));
+              }}
               className="appearance-none w-full bg-[#121212] border border-gray-800 rounded-lg py-3 px-4 pr-8 text-sm text-gray-200 focus:outline-none focus:ring-2 focus:ring-blue-500/40 focus:border-blue-400 transition"
             >
               <option value="">Select State</option>
               {states.map((s) => (
-                <option key={s}>{s}</option>
+                <option key={s} value={s}>
+                  {s}
+                </option>
               ))}
             </select>
             <ChevronDown className="absolute right-3 top-3.5 w-4 h-4 text-gray-500 pointer-events-none" />
@@ -47,15 +80,18 @@ const Detailthiredpage = ({
           <label className="text-sm text-gray-400">City</label>
           <div className="relative">
             <select
-              value={selectedCity}
-              onChange={(e) => setSelectedCity(e.target.value)}
-              disabled={!selectedState}
+              name="city"
+              value={formData.city}
+              onChange={handleChange}
+              disabled={!formData.state}
               className="appearance-none w-full bg-[#121212] border border-gray-800 rounded-lg py-3 px-4 pr-8 text-sm text-gray-200 focus:outline-none focus:ring-2 focus:ring-blue-500/40 focus:border-blue-400 transition disabled:opacity-50"
             >
               <option value="">Select City</option>
-              {selectedState &&
-                cities[selectedState].map((city: string) => (
-                  <option key={city}>{city}</option>
+              {formData.state &&
+                cities[formData.state]?.map((city: string) => (
+                  <option key={city} value={city}>
+                    {city}
+                  </option>
                 ))}
             </select>
             <ChevronDown className="absolute right-3 top-3.5 w-4 h-4 text-gray-500 pointer-events-none" />
@@ -69,7 +105,10 @@ const Detailthiredpage = ({
         <div className="relative">
           <input
             type="text"
+            name="pincode"
             placeholder="Enter Zip Code"
+            value={formData.pincode}
+            onChange={handleChange}
             className="w-full bg-[#121212] border border-gray-800 rounded-lg py-3 px-4 pr-10 text-sm text-gray-200 placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-blue-500/40 focus:border-blue-400 transition"
           />
           <MapPin className="absolute right-3 top-3.5 w-4 h-4 text-gray-500" />
@@ -82,7 +121,10 @@ const Detailthiredpage = ({
         <div className="relative">
           <input
             type="text"
+            name="addressLine"
             placeholder="eg: 21A North Lane ..."
+            value={formData.addressLine}
+            onChange={handleChange}
             className="w-full bg-[#121212] border border-gray-800 rounded-lg py-3 px-4 pr-10 text-sm text-gray-200 placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-blue-500/40 focus:border-blue-400 transition"
           />
           <Home className="absolute right-3 top-3.5 w-4 h-4 text-gray-500" />
@@ -90,13 +132,15 @@ const Detailthiredpage = ({
       </div>
 
       {/* Buttons */}
-      <div className="flex justify-end mt-6">
+      <div className="flex justify-between mt-6">
         <button
-          onClick={() => {
-            navigate("/");
-          }}
-          className="btn-primary"
+          type="button"
+          onClick={() => setStep(2)}
+          className="btn-secondary"
         >
+          Back
+        </button>
+        <button type="submit" className="btn-primary">
           Create Account
         </button>
       </div>

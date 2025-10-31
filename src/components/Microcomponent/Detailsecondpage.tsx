@@ -1,15 +1,46 @@
 import { Phone, User } from "lucide-react";
 import React from "react";
 
-const Detailsecondpage = ({ setStep }: { setStep: (step: number) => void }) => {
+interface DetailsecondpageProps {
+  setStep: (step: number) => void;
+  formData: {
+    tradingUsername: string;
+    phone: string;
+  };
+  setFormData: React.Dispatch<
+    React.SetStateAction<{
+      tradingUsername: string;
+      phone: string;
+      name?: string;
+      email?: string;
+      state?: string;
+      city?: string;
+      pincode?: string;
+      addressLine?: string;
+    }>
+  >;
+}
+
+const Detailsecondpage = ({ setStep, formData, setFormData }: DetailsecondpageProps) => {
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const { name, value } = e.target;
+    setFormData(prev => ({
+      ...prev,
+      [name]: value,
+    }));
+  };
+
   return (
-    <form className="space-y-5 mt-6">
+    <form className="space-y-5 mt-6" onSubmit={e => e.preventDefault()}>
       <div className="space-y-2">
         <label className="text-sm text-gray-400">TradingView Username</label>
         <div className="relative">
           <input
             type="text"
+            name="tradingUsername"
             placeholder="We’ll provide access to this ID"
+            value={formData.tradingUsername}
+            onChange={handleChange}
             className="w-full bg-[#121212] border border-gray-800 rounded-lg py-3 px-4 pr-10 text-sm text-gray-200 placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-blue-500/40 focus:border-blue-400 transition"
           />
           <User className="absolute right-3 top-3.5 w-4 h-4 text-gray-500" />
@@ -21,14 +52,24 @@ const Detailsecondpage = ({ setStep }: { setStep: (step: number) => void }) => {
         <div className="relative">
           <input
             type="text"
+            name="phone"
             placeholder="We’ll send important updates here"
+            value={formData.phone}
+            onChange={handleChange}
             className="w-full bg-[#121212] border border-gray-800 rounded-lg py-3 px-4 pr-10 text-sm text-gray-200 placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-blue-500/40 focus:border-blue-400 transition"
           />
           <Phone className="absolute right-3 top-3.5 w-4 h-4 text-gray-500 pointer-events-none" />
         </div>
       </div>
 
-      <div className="flex justify-end mt-6">
+      <div className="flex justify-between mt-6">
+          <button
+          type="button"
+          onClick={() => setStep(1)}
+          className="btn-secondary"
+        >
+          Back
+        </button>
         <button
           type="button"
           onClick={() => setStep(3)}

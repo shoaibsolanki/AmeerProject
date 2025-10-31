@@ -1,5 +1,5 @@
 import { ChevronDown, Bell, Home, User, Box } from "lucide-react";
-import { Link, useLocation } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 
 export default function Navbar() {
   const location = useLocation();
@@ -13,7 +13,7 @@ export default function Navbar() {
     if (location.pathname.startsWith("/settings")) return "bg-black/90";
     return "bg-black/90"; // default
   };
-
+const navigate = useNavigate();
   return (
     <nav
       className={`w-full ${getBgColor()} backdrop-blur-sm border-b border-gray-800 px-6 py-4 relative z-50 transition-colors duration-500`}
@@ -71,7 +71,7 @@ export default function Navbar() {
 
         {/* Right User Menu */}
         <div className="flex items-center gap-2 text-gray-200 cursor-pointer">
-          <User className="w-5 h-5" />
+          <User onClick={()=>navigate("/profile")} className="w-5 h-5" />
           <span>Natashia Bunny</span>
           <ChevronDown className="w-4 h-4" />
         </div>
