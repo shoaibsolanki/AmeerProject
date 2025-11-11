@@ -1,0 +1,5 @@
+@import "tailwindcss";
+
+@utility btn-primary {
+  @apply bg-blue-600 hover:bg-blue-500 text-white font-medium py-3 px-6 rounded-lg shadow-[0_0_20px_rgba(59,130,246,0.7)] transition;
+}
