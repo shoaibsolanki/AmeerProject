@@ -46,3 +46,21 @@ export const Requestforchangeusername = async (
   );
   return response.data;
 };
+
+export const Pendingrequest = async () => {
+  const response = await http.get(`user/get-requested-trading-usernames`);
+  return response.data;
+};
+
+export const Approveorreject = async (
+  id: string,
+  payload: {
+    status: string;
+  }
+) => {
+  const response = await http.post(
+    `user/${id}/validate-trading-request`,
+    payload
+  );
+  return response.data;
+};

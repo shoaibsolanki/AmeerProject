@@ -9,37 +9,31 @@ import PremiumBenefits from "./pages/PremiumBenefits";
 import Checkout from "./pages/Checkout";
 import ProfilePage from "./pages/ProfilePage";
 import ProtectedRoute from "./components/Protectedroute";
-import { CartProvider } from "./Context/CartContext";
+import { CartProvider } from "./Context/CartContext"; // import CartProvider
 import AdminRoute from "./admin/AdminRoute";
 import Dashboard from "./admin/pages/Dashboard";
 
 export default function App() {
   return (
-
-      <CartProvider>
-        <Router>
-          <Routes>
-            <Route path="/" element={<Layout />}>
-              {/* Wrap protected routes here */}
-              <Route element={<ProtectedRoute />}>
-                <Route index element={<Home />} />
-                <Route path="Details" element={<Detailpage />} />
-                <Route path="announcements" element={<Announcements />} />
-                <Route path="products" element={<Product />} />
-                <Route path="upgrade-premium" element={<PremiumBenefits />} />
-                <Route path="checkout" element={<Checkout />} />
-                <Route path="profile" element={<ProfilePage />} />
-              </Route>
-     {/* Admin protected routes */}
-              <Route path="admin" element={<AdminRoute />}>
-                <Route index element={<Dashboard />} />
-                {/* <Route path="users" element={<UserManagement />} /> */}
-                {/* Add more admin routes here */}
-              </Route>
-              {/* Public route */}
-              {/* <Route path="login" element={<Login />} />
-            </Route> */}
-
+    <CartProvider>
+      <Router>
+        <Routes>
+          <Route path="/" element={<Layout />}>
+            {/* Wrap protected routes here */}
+            <Route element={<ProtectedRoute />}>
+              <Route index element={<Home />} />
+              <Route path="Details" element={<Detailpage />} />
+              <Route path="announcements" element={<Announcements />} />
+              <Route path="products" element={<Product />} />
+              <Route path="upgrade-premium" element={<PremiumBenefits />} />
+              <Route path="checkout" element={<Checkout />} />
+              <Route path="profile" element={<ProfilePage />} />
+            </Route>
+            <Route path="admin" element={<AdminRoute />}>
+              <Route index element={<Dashboard />} />
+              {/* <Route path="users" element={<UserManagement />} /> */}
+              {/* Add more admin routes here */}
+            </Route>
             {/* Public route */}
             <Route path="login" element={<Login />} />
           </Route>
