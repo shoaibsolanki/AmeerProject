@@ -11,6 +11,8 @@ import {
 import Tabs from "../componants/Tabs";
 import Announcements from "./Announcements";
 import IDChanges from "./IDChanges";
+import DashboardLayout from "../DashboardLayout";
+import ProductManagement from "./ProductManagement";
 
 const tabLabels = [
   { label: "Dashboard", icon: Home },
@@ -21,18 +23,12 @@ const tabLabels = [
 ];
 
 const tabContent = [
-  <div
-    key="dashboard"
-    style={{ color: "#c7c9cc", fontSize: 18, textAlign: "center", padding: 60 }}
-  >
-    Dashboard Content
-  </div>,
-  <div
-    key="products"
-    style={{ color: "#c7c9cc", fontSize: 18, textAlign: "center", padding: 60 }}
-  >
-    Products Content
-  </div>,
+ 
+  <DashboardLayout key="dashboard" />,
+  <ProductManagement key="products" />,
+
+
+
   <div
     key="access"
     style={{ color: "#c7c9cc", fontSize: 18, textAlign: "center", padding: 60 }}
