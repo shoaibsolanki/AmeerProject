@@ -62,10 +62,12 @@ export default function ProductManagement() {
     <>
       <div className="bg-[#18181c] p-7 rounded-xl border border-gray-800 shadow-md min-h-[450px] max-w-5xl mx-auto mt-6">
         <div className="flex justify-between items-center mb-6">
-          <span className="font-medium text-sm text-gray-200">Product Management</span>
+          <span className="font-medium text-sm text-gray-200">
+            Product Management
+          </span>
           <button
             className="flex items-center gap-2 bg-blue-600 text-white px-5 py-2 rounded font-semibold text-sm hover:bg-blue-500 transition"
-            onClick={() => setShowModal(true)}  // Show modal on click
+            onClick={() => setShowModal(true)} // Show modal on click
           >
             <Plus size={18} /> Create Product
           </button>
@@ -108,19 +110,37 @@ export default function ProductManagement() {
                     <div className="text-xs text-gray-400">{p.desc}</div>
                   </td>
                   <td className="px-2 py-3">
-                    <span className={`px-2 py-1 rounded text-xs font-medium ${tierStyle(p.tier)}`}>{p.tier}</span>
+                    <span
+                      className={`px-2 py-1 rounded text-xs font-medium ${tierStyle(
+                        p.tier
+                      )}`}
+                    >
+                      {p.tier}
+                    </span>
                   </td>
                   <td className="px-2 py-3">{p.price}</td>
                   <td className="px-2 py-3 text-nowrap">{p.features}</td>
                   <td className="px-2 py-3">
-                    <span className={`px-3 py-1 rounded text-xs font-semibold ${statusStyle(p.status)}`}>{p.status}</span>
+                    <span
+                      className={`px-3 py-1 rounded text-xs font-semibold ${statusStyle(
+                        p.status
+                      )}`}
+                    >
+                      {p.status}
+                    </span>
                   </td>
                   <td className="px-2 py-3">
                     <div className="flex gap-3">
-                      <button className="p-2 rounded hover:bg-gray-700 transition" title="Edit">
+                      <button
+                        className="p-2 rounded hover:bg-gray-700 transition"
+                        title="Edit"
+                      >
                         <Pen size={16} className="text-gray-300" />
                       </button>
-                      <button className="p-2 rounded hover:bg-gray-700 transition" title="Delete">
+                      <button
+                        className="p-2 rounded hover:bg-gray-700 transition"
+                        title="Delete"
+                      >
                         <Trash2 size={16} className="text-red-400" />
                       </button>
                     </div>
@@ -132,21 +152,20 @@ export default function ProductManagement() {
         </div>
       </div>
 
-    {showModal && (
-  <ProductModal
-    show={showModal}
-    onClose={() => setShowModal(false)}
-    onSave={(form) => {
-      // handle save logic (optionally add product)
-      setShowModal(false);
-    }}
-    onDraft={() => {
-      // handle preview or save draft action
-      setShowModal(false);
-    }}
-  />
-)}
-
+      {showModal && (
+        <ProductModal
+          show={showModal}
+          onClose={() => setShowModal(false)}
+          onSave={(form) => {
+            // handle save logic (optionally add product)
+            setShowModal(false);
+          }}
+          onDraft={() => {
+            // handle preview or save draft action
+            setShowModal(false);
+          }}
+        />
+      )}
     </>
   );
 }

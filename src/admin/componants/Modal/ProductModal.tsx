@@ -40,26 +40,27 @@ export default function ProductModal({
 
   if (!show) return null;
 
-function handleChange(
-  e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>
-) {
-  const { name, value, type } = e.target;
+  function handleChange(
+    e: React.ChangeEvent<
+      HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement
+    >
+  ) {
+    const { name, value, type } = e.target;
 
-  if (type === "checkbox") {
-    // TypeScript ko btao ki target HTMLInputElement hai
-    const checkbox = e.target as HTMLInputElement;
-    setForm((prev) => ({
-      ...prev,
-      [name]: checkbox.checked,
-    }));
-  } else {
-    setForm((prev) => ({
-      ...prev,
-      [name]: value,
-    }));
+    if (type === "checkbox") {
+      // TypeScript ko btao ki target HTMLInputElement hai
+      const checkbox = e.target as HTMLInputElement;
+      setForm((prev) => ({
+        ...prev,
+        [name]: checkbox.checked,
+      }));
+    } else {
+      setForm((prev) => ({
+        ...prev,
+        [name]: value,
+      }));
+    }
   }
-}
-
 
   function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
@@ -77,7 +78,9 @@ function handleChange(
         >
           <X size={22} />
         </button>
-        <h2 className="text-lg font-bold text-gray-100 mb-1">Create New Product</h2>
+        <h2 className="text-lg font-bold text-gray-100 mb-1">
+          Create New Product
+        </h2>
         <p className="text-xs text-gray-400 mb-5">
           Add a new product to your catalog.
         </p>
@@ -169,7 +172,9 @@ function handleChange(
             </div>
           </div>
           <div className="flex items-center mt-2 mb-2 gap-3">
-            <label className="text-xs text-gray-400 flex-1">Active Status</label>
+            <label className="text-xs text-gray-400 flex-1">
+              Active Status
+            </label>
             <input
               type="checkbox"
               name="active"

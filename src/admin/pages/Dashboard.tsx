@@ -23,11 +23,8 @@ const tabLabels = [
 ];
 
 const tabContent = [
- 
   <DashboardLayout key="dashboard" />,
   <ProductManagement key="products" />,
-
-
 
   <div
     key="access"
