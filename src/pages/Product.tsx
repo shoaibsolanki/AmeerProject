@@ -36,15 +36,16 @@ const TradeCard: React.FC<
 }) => {
   return (
     <div
-      className={`rounded-xl bg-[#0A0A0A] shadow group ${
-        isPremium
-          ? 'flex h-[208px] p-4 items-start gap-4 rounded-[16px] border border-[rgba(255,255,255,0.08)] bg-[#0A0A0A]'
-          : 'flex w-[384px] p-4 flex-col  gap-4 rounded-[16px] bg-[#0A0A0A]'
-      }`}
+      className={`
+        rounded-xl bg-[#0A0A0A] shadow group relative
+        ${isPremium
+          ? 'flex flex-col sm:flex-row w-full sm:h-[208px] p-4 items-start gap-4 rounded-[16px] border border-[rgba(255,255,255,0.08)]'
+          : 'flex w-full max-w-[384px] mx-auto p-4 flex-col gap-4 rounded-[16px]'}
+      `}
     >
       {/* Top Right Toggle for Premium */}
       {isPremium && (
-        <div className="absolute top-4 right-4 z-20">
+        <div className="absolute top-2 right-2 sm:top-4 sm:right-4 z-20">
           <ToggelButton active={billingType} setActive={setBillingType} />
         </div>
       )}
@@ -55,14 +56,14 @@ const TradeCard: React.FC<
         src="/Trading.png"
         className={
           isPremium
-            ? "w-[269px] h-[176px] rounded-[8px] mr-4 object-cover bg-[#222229]"
-            : "w-full h-[176px] self-stretch rounded-[8px] "
+            ? "w-full sm:w-[269px] h-[140px] sm:h-[176px] rounded-[8px] object-cover bg-[#222229] mb-3 sm:mb-0 sm:mr-4"
+            : "w-full h-[176px] self-stretch rounded-[8px]"
         }
       />
 
       {/* Card Content */}
       {isPremium ? (
-        <div className="flex-1 text-white">
+        <div className="flex-1 w-full text-white">
           <div className="flex items-center gap-2 mb-1.5">
             <div className="flex items-center gap-1">
               {/* Premium Badge */}
@@ -81,31 +82,60 @@ const TradeCard: React.FC<
               <span className="text-xs text-[#ff4867] font-bold ml-1">Premium</span>
             </div>
           </div>
-          <h3 className="text-[20px] font-bold leading-normal">{title}</h3>
-          <p className="text-[#76757A] text-sm font-medium mt-1 leading-[20px]">
-            {/* {description} */}
+          <h3 className="text-lg sm:text-[20px] font-bold leading-normal">{title}</h3>
+          <p className="text-[#76757A] text-xs sm:text-sm font-medium mt-1 leading-[18px] sm:leading-[20px]">
             Experience institutional-grade precision with real-time daily support, resistance, and opening levels that react perfectly with market movement. Fully customizable and built for intraday traders and scalpers and giving structure, clarity, and confidence to take high-probability trades every session.
           </p>
-          <div className="flex justify-between items-center self-stretch">
-          <div className="flex items-center text-white font-semibold text-[20px] leading-normal mt-4">
-            ₹ {productAmount}
-            <span className="text-gray-400 text-[15px] ml-2">/mo</span>
-          </div>
-          <div className="mt-6 flex gap-3 justify-end">
-            <button className="border border-[#D9D9D9] rounded-[8px] flex px-[24px] py-[6px] justify-center items-center gap-[10px]">
-              View Demo
-            </button>
-            <button
-              className="flex h-[35px] px-[24px] py-[10px] justify-center items-center gap-[10px] rounded-[8px] bg-[#2563FF]"
-              onClick={() => addToCart(productId)}
-            >
-              Upgrade Premium Access
-            </button>
-          </div>
+          <div className="flex flex-col sm:flex-row justify-between items-end sm:items-center self-stretch mt-3 sm:mt-0 gap-3 sm:gap-0">
+            <div className="flex items-center text-white font-semibold text-lg sm:text-[20px] leading-normal mt-1">
+              ₹ {productAmount}
+              <span className="text-gray-400 text-xs sm:text-[15px] ml-1 sm:ml-2">/mo</span>
+            </div>
+          <div className="
+  flex flex-col sm:flex-row
+  gap-2 sm:gap-3
+  justify-end
+  w-full sm:w-auto
+  mt-3 sm:mt-6
+">
+  {/* MOBILE: full width, vertical stack
+      DESKTOP: row, right aligned, same as abhi */}
+
+  <button
+    className="
+      border border-[#D9D9D9] rounded-[8px]
+      inline-flex items-center justify-center
+      w-full sm:w-auto
+      px-4 sm:px-[24px]
+      py-2 sm:py-[6px]
+      text-xs sm:text-sm
+      font-medium
+    "
+  >
+    View Demo
+  </button>
+
+  <button
+    className="
+      rounded-[8px] bg-[#2563FF] text-white
+      inline-flex items-center justify-center
+      w-full sm:w-auto
+      h-[36px] sm:h-[35px]
+      px-4 sm:px-[24px]
+      py-2 sm:py-[10px]
+      text-xs sm:text-sm
+      font-medium
+    "
+    onClick={() => addToCart(productId)}
+  >
+    Upgrade Premium Access
+  </button>
+</div>
+
           </div>
         </div>
       ) : (
-        <div className="flex flex-col flex-1 px-5 pb-5">
+        <div className="flex flex-col flex-1 px-4 sm:px-5 pb-3 sm:pb-5">
           <span className=" bg-gradient-to-r from-[#08B7FC] to-[#0050C0] bg-clip-text text-transparent font-inter text-[12px] font-semibold leading-normal">Free</span>
           <h3 className="text-white font-semibold text-lg mt-2">
             {title}
@@ -114,7 +144,7 @@ const TradeCard: React.FC<
             {description}
           </p>
           <button
-            className="mt-8 w-full  btn-primary"
+            className="mt-6 sm:mt-8 w-full btn-primary"
             onClick={() => addToCart(productId)}
           >
             Add Product

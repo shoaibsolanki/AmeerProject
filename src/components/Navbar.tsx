@@ -62,7 +62,7 @@ export default function Navbar() {
         !location.pathname.startsWith("/admin"),
     },
     {
-      title: "Cart",
+      title: "Your Cart",
       to: "/checkout",
       icon: (
         <div className="relative">
