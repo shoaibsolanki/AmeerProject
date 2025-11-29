@@ -33,24 +33,24 @@ export default function Checkout() {
           </button>
           <h2 className="text-2xl font-bold mb-2 flex items-center justify-between">
             Check Out
-            <button
+            {/* <button
               onClick={clearCart}
               className="bg-red-600 hover:bg-red-700 text-white px-3 py-1 rounded text-sm"
               title="Clear Cart"
             >
               Clear Cart
-            </button>
+            </button> */}
           </h2>
-          <p className="text-gray-400 mb-6 text-sm max-w-lg">
+          <p className="text-gray-400 mb-6 font-inter font-medium text-[18px] leading-[24px] tracking-[0]">
             There’s no charges during your free trial. We’ll only use this info
             to process your plan payment if you decide to continue after the
             trial ends.
           </p>
 
-          <div className="overflow-x-auto rounded-xl border border-[#23232a] bg-[#16161b]">
+          <div className="overflow-x-auto ">
             <table className="w-full text-left text-sm">
               <thead>
-                <tr className="bg-[#22222a] uppercase text-xs text-gray-400 font-bold">
+                <tr className="bg-[#22222a] uppercase text-xs text-white font-bold">
                   <th className="py-3 pl-6 pr-4">Product</th>
                   <th className="py-3 px-4">Paid/Free</th>
                   <th className="py-3 px-4">Validity</th>
@@ -96,10 +96,13 @@ export default function Checkout() {
                 ))}
               </tbody>
             </table>
-            <div className="flex justify-end py-4 pr-6 text-base border-t border-[#23232a]">
-              <span className="text-gray-100 font-semibold">Total</span>
-              <span className="ml-16 text-white font-bold">₹ {total}</span>
-            </div>
+          <div className="flex justify-between py-4 px-6 text-base border-t border-[#23232a] border-b-[0.2px] ">
+  <span className="text-gray-100 font-semibold">Total</span>
+  <span className="text-white font-bold pr-0 md:pr-48">
+    ₹ {total}
+  </span>
+</div>
+
           </div>
         </section>
 
