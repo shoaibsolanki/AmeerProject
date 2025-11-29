@@ -12,8 +12,25 @@ import ProtectedRoute from "./components/Protectedroute";
 import { CartProvider } from "./Context/CartContext"; // import CartProvider
 import AdminRoute from "./admin/AdminRoute";
 import Dashboard from "./admin/pages/Dashboard";
-
+import { useEffect, useState } from "react";
+import FullLoader from "./components/FullLoader";
 export default function App() {
+   const [appLoading, setAppLoading] = useState(true);
+
+  useEffect(() => {
+    // yahan pe jo bhi initial work hai (auth check, user fetch, etc.) karo
+    const init = async () => {
+      // await fetchUser();
+      // minimum 1–1.5 sec delay for smooth splash (optional)
+      await new Promise((res) => setTimeout(res, 1500));
+      setAppLoading(false);
+    };
+    init();
+  }, []);
+
+  if (appLoading) {
+    return (<FullLoader />);
+  }
   return (
     <CartProvider>
       <Router>
